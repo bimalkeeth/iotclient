@@ -6,7 +6,7 @@ import (
 	"go.uber.org/fx"
 )
 
-var Module = fx.Provide(New())
+var Module = fx.Options(fx.Provide(NewClient))
 
 type IClientService interface {
 	Add(ctx context.Context, numA, numB float32) (float32, error)
@@ -16,9 +16,9 @@ type clientService struct {
 }
 
 func (c clientService) Add(ctx context.Context, numA, numB float32) (float32, error) {
-	panic("implement me")
+	return 10, nil
 }
 
-func New() IClientService {
-	return &clientService{}
+func NewClient() IClientService {
+	return clientService{}
 }
